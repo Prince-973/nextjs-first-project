@@ -8,6 +8,9 @@ export default function Home() {
         <li>
           <Link href="/portrfolio">Portfolio</Link>
         </li>
+        <li>
+          <Link href="/clients">client</Link>
+        </li>
       </ul>
     </>
   );
