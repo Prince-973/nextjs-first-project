@@ -11,7 +11,11 @@ function Eventdetail() {
   const eventId = router.query.eventId;
   const event = getEventById(eventId);
   if (!event) {
-    return <p>No Event Found</p>;
+    return (
+      <ErrorAlert>
+        <p>No Event Found</p>;
+      </ErrorAlert>
+    );
   }
   return (
     <Fragment>
