@@ -3,6 +3,7 @@ import EventLogistics from "@/components/event-detail/event-logistics";
 import EventSummary from "@/components/event-detail/event-summary";
 
 import { getAllEvents, getEventById } from "@/helper/api-util";
+import Head from "next/head";
 import { Fragment } from "react";
 
 function Eventdetail(props) {
@@ -16,6 +17,10 @@ function Eventdetail(props) {
   }
   return (
     <Fragment>
+      <Head>
+        <title>{event.title}</title>
+        <meta name="description" content={event.description} />
+      </Head>
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}

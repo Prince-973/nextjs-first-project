@@ -3,19 +3,41 @@ import ResultsTitle from "@/components/events/result-title";
 import Button from "@/components/ui/button";
 import ErrorAlert from "@/components/ui/error-alert";
 import { getFilteredEvents } from "@/helper/api-util";
+import Head from "next/head";
 import { useRouter } from "next/router";
 
 function FileterEventPage(props) {
   const router = useRouter();
   const filteredData = router.query.slug;
+  let pageHeadData = (
+    <Head>
+      <title>Filter Events</title>
+      <meta name="description" content="Loading Data" />
+    </Head>
+  );
   if (!filteredData) {
-    return <p className="center">Loading...</p>;
+    return (
+      <>
+        {pageHeadData}
+        <p className="center">Loading...</p>;
+      </>
+    );
   }
   const { filteredEvents } = props;
+  pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name="description"
+        content={`All events for ${props.date.year} & ${props.date.month - 1} `}
+      />
+    </Head>
+  );
 
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events Found for choosen Filter</p>
         </ErrorAlert>
@@ -30,6 +52,7 @@ function FileterEventPage(props) {
 
   return (
     <>
+      {pageHeadData}
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </>
