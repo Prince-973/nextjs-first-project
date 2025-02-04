@@ -4,9 +4,9 @@ import React from "react";
 const CommentList = ({ items }) => {
   return (
     <ul className={classes.comments}>
-      {items.map((item, index) => (
-        <li key={index}>
-          <p>{item.content}</p>
+      {items.map((item) => (
+        <li key={item._id}>
+          <p>{item.text}</p>
           <div>
             By <address>{item.name}</address>
           </div>
