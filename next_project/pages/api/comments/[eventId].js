@@ -30,7 +30,7 @@ async function handler(req, res) {
       });
       return;
     }
-    console.log(email, name, text);
+    // console.log(email, name, text);
 
     const newComment = {
       email,
@@ -44,8 +44,6 @@ async function handler(req, res) {
 
       newComment._id = response.insertedId;
     } catch (error) {
-      console.log(error);
-
       return res.status(500).json({
         message: "instering database failed",
         error: error.message,
