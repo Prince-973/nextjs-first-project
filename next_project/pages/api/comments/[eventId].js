@@ -1,10 +1,21 @@
+import {
+  connectDateBase,
+  getAllDocuments,
+  insertDocumnet,
+} from "@/helper/db-util";
 import { MongoClient } from "mongodb";
 
 async function handler(req, res) {
   const eventId = req.query.eventId;
-  const client = await MongoClient.connect(
-    "mongodb+srv://prinsvaghasiyait21:Prince832004@cluster0.01ztk.mongodb.net/events?retryWrites=true&w=majority"
-  );
+  let client;
+  try {
+    client = await connectDateBase();
+  } catch (error) {
+    return res.status(500).json({
+      message: "connecting database failed",
+      error: error.message,
+    });
+  }
   if (req.method === "POST") {
     const { email, text, name } = req.body;
     if (
@@ -22,18 +33,26 @@ async function handler(req, res) {
     console.log(email, name, text);
 
     const newComment = {
-      id: new Date().toISOString(),
       email,
       name,
       text,
       eventId,
     };
+    let response;
+    try {
+      response = await insertDocumnet(client, "comments", newComment);
 
-    const db = client.db();
-    const response = await db.collection("comments").insertOne(newComment);
+      newComment._id = response.insertedId;
+    } catch (error) {
+      console.log(error);
 
-    console.log(response);
-    newComment.id = response.insertedId;
+      return res.status(500).json({
+        message: "instering database failed",
+        error: error.message,
+      });
+    }
+
+    // console.log(response);
 
     res.status(201).json({
       message: "new comment created",
@@ -42,15 +61,16 @@ async function handler(req, res) {
   }
 
   if (req.method === "GET") {
-    const db = client.db();
-    const comments = await db
-      .collection("comments")
-      .find()
-      .sort({
-        _id: -1,
-      })
-      .toArray();
-    res.status(200).json({ comment: comments });
+    let document;
+    try {
+      document = await getAllDocuments(client, "comments");
+    } catch (error) {
+      return res.status(500).json({
+        message: "error getting data",
+        error: error.message,
+      });
+    }
+    res.status(200).json({ comment: document });
   }
   client.close();
 }
