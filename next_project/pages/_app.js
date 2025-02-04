@@ -17,11 +17,6 @@ export default function App({ Component, pageProps }) {
             />
           </Head>
           <Component {...pageProps} />;
-          <Notification
-            title="test"
-            message="this is a test"
-            status="pending"
-          />
         </Layout>
       </NotificationContextProvider>
     </>
