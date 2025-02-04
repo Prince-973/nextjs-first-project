@@ -1,0 +1,18 @@
+import classes from "./comment-list.module.css";
+import React from "react";
+
+const CommentList = ({ items }) => {
+  return (
+    <ul className={classes.comments}>
+      {items.map((item, index) => (
+        <li key={index}>
+          <p>{item.content}</p>
+          <div>
+            By <address>{item.name}</address>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+};
+export default CommentList;
