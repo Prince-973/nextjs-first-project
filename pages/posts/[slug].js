@@ -1,6 +1,5 @@
 import PostContent from "@/components/posts/post-detail/post-content";
 import { getPostData, getPostFile } from "@/lib/post-util";
-import React from "react";
 
 function PostDeatailPage(props) {
   return <PostContent post={props.post} />;
