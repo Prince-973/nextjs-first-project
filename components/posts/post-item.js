@@ -3,7 +3,10 @@ import classes from "./post-item.module.css";
 import Link from "next/link";
 import Image from "next/image";
 function PostItem(props) {
+  // console.log(props.post);
+
   const { title, image, excerpt, date, slug } = props.post;
+  // console.log(image);
 
   const formattedDate = new Date(date).toLocaleDateString("en-IN", {
     day: "numeric",
@@ -11,7 +14,7 @@ function PostItem(props) {
     year: "numeric",
   });
   const imagePath = `/images/posts/${slug}/${image}`;
-  const LinkPath = `/images/posts/${slug}`;
+  const LinkPath = `/posts/${slug}`;
   return (
     <li className={classes.post}>
       <Link href={LinkPath}>
@@ -26,7 +29,7 @@ function PostItem(props) {
         </div>
         <div className={classes.content}>
           <h3>{title}</h3>
-          <time datetime="">{formattedDate}</time>
+          <time>{formattedDate}</time>
           <p>{excerpt}</p>
         </div>
       </Link>
