@@ -35,3 +35,4 @@ function PostItem(props) {
 }
 
 export default PostItem;
+// /home/dev/Project-1/API_next/blog_App/public/images/posts/getting-started-with-nextjs/getting-started-with-nextjs.jpg
