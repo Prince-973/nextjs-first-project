@@ -37,7 +37,6 @@ async function handler(req, res) {
     email,
     password: hashPassword1,
   });
-  // console.log(result);
 
   res.status(201).json({
     message: "User created successfully",

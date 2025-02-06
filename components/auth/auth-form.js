@@ -1,10 +1,12 @@
 import { useState, useRef } from "react";
 import classes from "./auth-form.module.css";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const router = useRouter();
 
   async function craeteUser(email, password) {
     const response = await fetch("/api/auth/signup", {
@@ -36,12 +38,11 @@ function AuthForm() {
       });
       if (!result.error) {
         // set some auth state
+        router.replace("/profile");
       }
-      console.log(result);
     } else {
       try {
         const result = await craeteUser(enterdEmail, enterdPassword);
-        console.log(result);
       } catch (error) {
         console.log(error);
       }
