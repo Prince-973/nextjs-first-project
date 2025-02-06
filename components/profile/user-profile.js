@@ -4,7 +4,7 @@ import classes from "./user-profile.module.css";
 import { useEffect, useState } from "react";
 import { redirect } from "next/dist/server/api-utils";
 
-function UserProfile(props) {
+function UserProfile() {
   // Redirect away if NOT auth
   // const [isLoading, setIsLoading] = useState(true);
 
@@ -25,11 +25,10 @@ function UserProfile(props) {
   async function changePasswordHandler(passwordData) {
     const response = await fetch("/api/user/change-password", {
       method: "PATCH",
-      body: JSON.stringify({ passwordData, props }),
+      body: JSON.stringify(passwordData),
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
     });
     const data = await response.json();
     console.log(data);

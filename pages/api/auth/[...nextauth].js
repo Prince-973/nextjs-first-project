@@ -3,9 +3,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToDatabase } from "../../../lib/db";
 import { verifyPassword } from "../../../lib/auth";
 
-export default NextAuth({
+export const authOptions = {
   session: {
-    strategy: "jwt", // Use 'strategy' instead of 'jwt: true'
+    strategy: "jwt", // Use 'jwt' strategy for session handling
   },
   providers: [
     CredentialsProvider({
@@ -19,10 +19,7 @@ export default NextAuth({
         const userCollection = client.db().collection("users");
 
         // Find the user by email
-        const user = await userCollection.findOne({
-          email: credentials.email,
-        });
-
+        const user = await userCollection.findOne({ email: credentials.email });
         if (!user) {
           client.close();
           throw new Error("No user found!");
@@ -33,7 +30,6 @@ export default NextAuth({
           credentials.password,
           user.password
         );
-
         if (!isValid) {
           client.close();
           throw new Error("Wrong password!");
@@ -44,9 +40,13 @@ export default NextAuth({
         // Return the user object if authentication is successful
         return {
           email: user.email,
+          name: user.name || null,
+          image: user.image || null,
         };
       },
     }),
   ],
-  secret: "Prince@832004", // Ensure you have a secret defined in your environment variables
-});
+  secret: "Prince@832004",
+};
+
+export default NextAuth(authOptions);

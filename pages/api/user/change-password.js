@@ -1,21 +1,26 @@
 import { getSession } from "next-auth/react";
 import { connectToDatabase } from "../../../lib/db";
 import { hashPassword, verifyPassword } from "../../../lib/auth";
+import { authOptions } from "../auth/[...nextauth]";
+import { getServerSession } from "next-auth";
 
 async function handler(req, res) {
   if (req.method !== "PATCH") {
     return;
   }
-  const { props } = req.body;
 
-  const session = props.session;
+  // const session = props.session;
+
+  // const session = await getSession({ req });
+  const session = await getServerSession(req, res, authOptions);
+  // console.log(session);
+  const userEmail = session.user.email;
 
   if (!session) {
     return res.status(401).json({ message: "Not Authenticated!" });
   }
-  const userEmail = session.user.email;
 
-  const { oldPassword, newPassword } = req.body.passwordData;
+  const { oldPassword, newPassword } = req.body;
 
   const client = await connectToDatabase();
   const userCollection = client.db().collection("users");

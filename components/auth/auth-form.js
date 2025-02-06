@@ -42,7 +42,7 @@ function AuthForm() {
       }
     } else {
       try {
-        const result = await craeteUser(enterdEmail, enterdPassword);
+        await craeteUser(enterdEmail, enterdPassword);
       } catch (error) {
         console.log(error);
       }
