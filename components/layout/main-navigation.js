@@ -3,7 +3,7 @@ import { useSession, signOut } from "next-auth/react";
 import classes from "./main-navigation.module.css";
 
 function MainNavigation() {
-  const { data: session, status } = useSession();
+  const { data, status } = useSession();
 
   function logoutHandler() {
     signOut();
