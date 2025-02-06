@@ -33,10 +33,11 @@ async function handler(req, res) {
   }
 
   const hashPassword1 = await hashPassword(password);
-  db.collection("users").insertOne({
+  await db.collection("users").insertOne({
     email,
     password: hashPassword1,
   });
+  // console.log(result);
 
   res.status(201).json({
     message: "User created successfully",

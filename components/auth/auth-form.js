@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import classes from "./auth-form.module.css";
+import { signIn } from "next-auth/react";
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
   const emailInputRef = useRef();
@@ -28,7 +29,15 @@ function AuthForm() {
     const enterdPassword = passwordInputRef.current.value;
     //validation optional
     if (isLogin) {
-      //log user in
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: enterdEmail,
+        password: enterdPassword,
+      });
+      if (!result.error) {
+        // set some auth state
+      }
+      console.log(result);
     } else {
       try {
         const result = await craeteUser(enterdEmail, enterdPassword);
