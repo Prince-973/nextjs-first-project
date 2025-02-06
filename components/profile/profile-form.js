@@ -14,6 +14,8 @@ function ProfileForm(props) {
       oldPassword: enteredOldPassword,
       newPassword: enteredNewPassword,
     });
+    oldPasswordRef.current.value = "";
+    newPasswordRef.current.value = "";
   }
   return (
     <form className={classes.form} onSubmit={submitHandler}>

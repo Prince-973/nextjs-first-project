@@ -47,6 +47,8 @@ function AuthForm() {
         console.log(error);
       }
     }
+    emailInputRef.current.value = "";
+    passwordInputRef.current.value = "";
   }
 
   return (
