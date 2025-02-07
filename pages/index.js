@@ -5,7 +5,7 @@ function HomePage() {
   return (
     <>
       <Head>
-        <title>Home Page</title>
+        <title>Not Home Page</title>
         <meta name="description" content="this is the home page" />
       </Head>
       <StartingPageContent />;
