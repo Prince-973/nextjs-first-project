@@ -9,11 +9,7 @@ async function handler(req, res) {
     return;
   }
 
-  // const session = props.session;
-
-  // const session = await getSession({ req });
   const session = await getServerSession(req, res, authOptions);
-  // console.log(session);
   const userEmail = session.user.email;
 
   if (!session) {
