@@ -35,3 +35,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Minor Update
 This is a minor update to the README file.
+
+## Minor Update
+This is a minor update to the README file.
