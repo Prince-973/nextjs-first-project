@@ -40,7 +40,6 @@ function AuthForm() {
     } else {
       try {
         await craeteUser(enterdEmail, enterdPassword);
-        router.replace("/auth");
       } catch (error) {
         console.log(error);
       }
