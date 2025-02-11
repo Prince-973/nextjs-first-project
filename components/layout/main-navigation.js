@@ -18,7 +18,6 @@ function MainNavigation() {
           {status === "loading" && (
             <li>
               <p>Loading...</p>{" "}
-              {/* Show a loading indicator while session is being fetched */}
             </li>
           )}
           {status === "unauthenticated" && (
