@@ -10,7 +10,7 @@ async function handler(req, res) {
   }
 
   const session = await getServerSession(req, res, authOptions);
-  const userEmail = session.user.xyz;
+  const userEmail = session.user.email;
 
   if (!session) {
     return res.status(401).json({ message: "Not Authenticated!" });

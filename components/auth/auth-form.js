@@ -36,10 +36,7 @@ function AuthForm() {
         email: enterdEmail,
         password: enterdPassword,
       });
-      if (!result.error) {
-        // set some auth state
-        router.replace("/profile");
-      }
+      router.replace("/profile");
     } else {
       try {
         await craeteUser(enterdEmail, enterdPassword);
